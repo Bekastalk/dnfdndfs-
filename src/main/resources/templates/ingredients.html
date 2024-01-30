@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Просмотр ингредиентов</title>
+    <title>Список ингредиентов</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -16,49 +16,30 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="pl-5">
-    <h1 class="header">Ингредиенты продукта: <span th:text="${ingredients.size() > 0 ? ingredients[0].product.name : ''}"></span></h1>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>ID</th>
-            <th>Материал</th>
-            <th>Количество</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="ingredient : ${ingredients}">
-            <td th:text="${ingredient.id}"></td>
-            <td th:text="${ingredient.material.name}"></td>
-            <td th:text="${ingredient.quantity}"></td>
-            <td>
-                <a th:href="@{'/ingredient-edit/' + ${ingredient.id}}">
-                    <button class="btn btn-info" title="Изменить">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill"
-                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M12.354 0l2.853 2.853-10.96 10.96-2.854-2.854L12.354 0zm1.06 1.06L3.454 11.566l-1.06 4.95 4.95-1.06L13.414 1.06z"/>
-                        </svg>
-                        Изменить
-                    </button>
-                </a>
-                <a th:href="@{'/ingredient-delete/' + ${ingredient.id}}">
-                    <button class="btn btn-danger" title="Удалить">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
-                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                        </svg>
-                        Удалить
-                    </button>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div th:switch="${ingredients}" class="pl-3">
+    <h1 class="header">Ингредиенты для продукта: <span th:text="${product.getName()}"></span></h1>
     <div class="mb-4">
-        <a th:href="@{/ingredient-create}" class="btn btn-success" role="button" aria-disabled="true">Создание ингредиента</a>
+        <!-- Можете добавить здесь необходимые кнопки или ссылки -->
+    </div>
+    <div th:case="*">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Продукт</th>
+                <th>Материал</th>
+                <th>Количество</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr scope="row" th:each="ingredient : ${ingredients}">
+                <td th:text="${ingredient.getId()}"></td>
+                <td th:text="${ingredient.getProduct().getName()}"></td>
+                <td th:text="${ingredient.getMaterial().getName()}"></td>
+                <td th:text="${ingredient.getQuantity()}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

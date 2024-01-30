@@ -16,4 +16,6 @@ public interface ProductService {
     Optional<Product> findById(Long id);
 
     void updateProduct(Product product);
+
+    Optional<Product> getById(Long productId);
 }

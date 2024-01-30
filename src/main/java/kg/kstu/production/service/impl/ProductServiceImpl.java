@@ -38,6 +38,11 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(Product product) {
         productRepository.save(product);
     }
+
+    @Override
+    public Optional<Product> getById(Long productId) {
+        return productRepository.findById(productId);
+    }
     /*private ProductDto mapToProductsDto(Product product) {
         return ProductDto.builder()
                 .id(product.getId())
