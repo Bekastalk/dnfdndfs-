@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="HTML File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -93,7 +93,8 @@
       <workItem from="1706533857870" duration="373000" />
       <workItem from="1706584847877" duration="182000" />
       <workItem from="1706585135825" duration="429000" />
-      <workItem from="1706585602198" duration="2098000" />
+      <workItem from="1706585602198" duration="9530000" />
+      <workItem from="1706600281773" duration="1444000" />
     </task>
     <task id="LOCAL-00001" summary="employees &amp; products">
       <option name="closed" value="true" />

@@ -17,4 +17,6 @@ public interface IngredientsService {
     Optional<Ingredient> findById(Long id);
 
     String updateIngredient(Ingredient ingredient);
+
+    void save(Ingredient ingredient);
 }

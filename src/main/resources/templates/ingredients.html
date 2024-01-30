@@ -19,7 +19,8 @@
 <div th:switch="${ingredients}" class="pl-3">
     <h1 class="header">Ингредиенты для продукта: <span th:text="${product.getName()}"></span></h1>
     <div class="mb-4">
-        <!-- Можете добавить здесь необходимые кнопки или ссылки -->
+        <a th:href="@{/ingredients/create/{productId}(productId=${product.id})}" class="btn btn-primary" role="button">Создать ингредиент</a>
+
     </div>
     <div th:case="*">
         <table class="table">

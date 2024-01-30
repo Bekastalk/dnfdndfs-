@@ -26,8 +26,9 @@ public class IngredientsServiceImpl implements IngredientsService {
     @Override
     public String createIngredient(Ingredient ingredient) {
         boolean contains = ingredientsRepository.findAll()
-                        .stream()
-                                .anyMatch(i -> i.getMaterial().getId().equals(ingredient.getMaterial().getId()));
+                .stream()
+                .filter(i -> Objects.equals(i.getProduct().getId(), ingredient.getProduct().getId()))
+                .anyMatch(i -> i.getMaterial().getId().equals(ingredient.getMaterial().getId()));
         if(contains) {
             return "Ingredient already contains";
         } else {
@@ -50,8 +51,8 @@ public class IngredientsServiceImpl implements IngredientsService {
     public String updateIngredient(Ingredient ingredient) {
         boolean contains = ingredientsRepository.findAll()
                 .stream()
-                .filter(i -> Objects.equals(i.getProduct().getId(), ingredient.getProduct().getId()) &&
-                        !Objects.equals(i.getId(), ingredient.getId()))
+                .filter(i -> Objects.equals(i.getProduct().getId(), ingredient.getProduct().getId()) /*&&
+                        !Objects.equals(i.getId(), ingredient.getId())*/)
                 .anyMatch(i -> Objects.equals(i.getMaterial().getId(), ingredient.getMaterial().getId()));
         if (!contains) {
             ingredientsRepository.save(ingredient);
@@ -59,6 +60,11 @@ public class IngredientsServiceImpl implements IngredientsService {
         } else {
             return "The product already contains";
         }
+    }
+
+    @Override
+    public void save(Ingredient ingredient) {
+        ingredientsRepository.save(ingredient);
     }
     /*private IngredientsDto mapToIngredientsDto(Ingredients ingredient) {
         return IngredientsDto.builder()

@@ -1,8 +1,10 @@
 package kg.kstu.production.controller;
 
 import kg.kstu.production.entity.Ingredient;
+import kg.kstu.production.entity.Material;
 import kg.kstu.production.entity.Product;
 import kg.kstu.production.service.IngredientsService;
+import kg.kstu.production.service.MaterialService;
 import kg.kstu.production.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/ingredients")
@@ -22,6 +25,7 @@ public class IngredientController {
 
     final ProductService productService;
     final IngredientsService ingredientsService;
+    final MaterialService materialService;
 
     @GetMapping("/list/{productId}")
     public String getIngredientsByProduct(@PathVariable Long productId, Model model) {
@@ -30,6 +34,7 @@ public class IngredientController {
             Product product = productOptional.get();
             model.addAttribute("product", product);
             model.addAttribute("ingredients", ingredientsService.getAll(productId));
+            model.addAttribute("materials", materialService.getAll());
             return "ingredients";
         } else {
             // Обработка случая, когда продукт не найден
@@ -37,12 +42,38 @@ public class IngredientController {
         }
     }
 
+    // Метод для отображения формы создания ингредиента для конкретного продукта
     @GetMapping("/create/{productId}")
     public String showCreateIngredientForm(@PathVariable Long productId, Model model) {
-        model.addAttribute("ingredient", new Ingredient());
-        model.addAttribute("productId", productId);
-        // Добавьте другие атрибуты по необходимости
-        return "createIngredient";
+        Optional<Product> productOptional = productService.findById(productId);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            model.addAttribute("product", product);
+
+            List<Material> materials = materialService.getAll(); // Получите список материалов
+            model.addAttribute("materials", materials);
+
+            Ingredient ingredient = new Ingredient();
+            model.addAttribute("ingredient", ingredient);
+
+            return "createIngredient";
+        } else {
+            return "redirect:/products";
+        }
+    }
+
+
+    // Метод для обработки создания ингредиента
+    @PostMapping("/create")
+    public String createIngredient(@ModelAttribute Ingredient ingredient) {
+        System.out.println("\n\n\n\n\n\nИнгредиент:\n\n\n\n\n\n\n");
+        System.out.println("ING: " + ingredient.getMaterial());
+        // Проверки и сохранение ингредиента
+        ingredientsService.createIngredient(ingredient);
+
+        // Перенаправить на страницу со списком ингредиентов для выбранного продукта
+        return "redirect:/ingredients/list/" + ingredient.getProduct().getId();
     }
 
     /*
