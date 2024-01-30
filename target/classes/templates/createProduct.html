@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление Продукта</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="pl-5">
+    <h1 class="header">Добавление Продукта</h1>
+    <form action="#" th:action="@{/product-create}" method="post" th:object="${product}">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="name">Название</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="name" th:field="*{name}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="unitOfMeasurement">Единица измерения</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="unitOfMeasurement" th:field="${product.unitOfMeasurement}">
+                    <option th:value="null"></option>
+                    <option th:each="unit : ${unitOfMeasurements}" th:value="${unit.id}"
+                            th:text="${unit.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="quantity">Количество</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="quantity" th:field="*{quantity}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="amount">Сумма</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="amount" th:field="*{amount}">
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" value="Сохранить">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

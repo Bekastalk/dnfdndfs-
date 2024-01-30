@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список продуктов</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:switch="${products}" class="pl-3">
+    <h1 class="header">Продукты</h1>
+    <div class="mb-4">
+        <a href="/product/create" class="btn btn-outline-success" role="button" aria-disabled="true">Создание продукта</a>
+    </div>
+    <div th:case="*">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Единица измерения</th>
+                <th>Количество</th>
+                <th>Сумма</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr scope="row" th:each="product : ${products}">
+                <td th:text="${product.getId()}"></td>
+                <td th:text="${product.getName()}"></td>
+                <td th:text="${product.getUnitOfMeasurement().getName()}"></td>
+                <td th:text="${product.getQuantity()}"></td>
+                <td th:text="${product.getAmount()}"></td>
+                <td>
+                    <center>
+                        <a th:href="@{/product-delete/{id}(id=${product.getId()})}">
+                            <button class="btn-del">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                </svg>
+                            </button>
+                        </a>
+                        <a th:href="@{/product-edit/{id}(id=${product.getId()})}">
+                            <button class="btn-edit ml-2">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M12.354 0l2.853 2.853-10.96 10.96-2.854-2.854L12.354 0zm1.06 1.06L3.454 11.566l-1.06 4.95 4.95-1.06L13.414 1.06z"/>
+                                </svg>
+                            </button>
+                        </a>
+                        <a th:href="@{/ingredients/list/{productId}(productId=${product.id})}">
+                            <button class="btn-view-ingredients ml-2">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.742 10.344a7.5 7.5 0 1 0-1.397 1.398h0a7.5 7.5 0 0 0 1.397-1.398h0zM12 7.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0z"/>
+                                    <path fill-rule="evenodd"
+                                          d="M15.742 14.344a1 1 0 0 0-1.415-1.414l-2.793 2.793a7.5 7.5 0 0 0 1.415-1.414l2.793-2.793a1 1 0 0 0 1.414 1.414l-2.793 2.793zM12 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg>
+                                Просмотр ингредиентов
+                            </button>
+                        </a>
+                    </center>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

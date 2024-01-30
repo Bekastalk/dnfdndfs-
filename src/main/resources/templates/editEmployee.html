@@ -1,0 +1,60 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение записи</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="pl-5">
+    <h1 class="header">Изменение Сотрудника</h1>
+    <form action="#" th:action="@{/employee-edit/{employeeId}(employeeId=${employee.id})}" method="post" th:object="${employee}">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="name">Имя</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="name" th:field="*{name}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="salary">Зарплата</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="salary" th:field="*{salary}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="address">Адрес</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="address" th:field="*{address}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="phone_number">Номер Телефона</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="phone_number" th:field="*{phone_number}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="positions">Должность</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="positions" th:field="${employee.position}">
+                    <option th:value="null"></option>
+                    <option th:each="position : ${positions}" th:value="${position.id}"
+                            th:text="${position.name}"></option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" value="Сохранить">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>
