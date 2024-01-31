@@ -11,7 +11,7 @@ public interface ProductService {
 
     void createProduct(Product product);
 
-    void deleteProduct(Long id);
+    String deleteProduct(Long id);
 
     Optional<Product> findById(Long id);
 

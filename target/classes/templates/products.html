@@ -16,6 +16,13 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 text-right">
+            <a href="/employee-list" class="btn btn-primary">Список Работников</a>
+            <a href="/product-list" class="btn btn-info ml-2">Список Продуктов</a>
+        </div>
+    </div>
 <div th:switch="${products}" class="pl-3">
     <h1 class="header">Продукты</h1>
     <div class="mb-4">
