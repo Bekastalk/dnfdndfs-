@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Ingredient</title>
+    <title>Изменение записи</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -16,44 +16,44 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="header">Edit Ingredient</h1>
-
-    <form th:action="@{/ingredients/update}" th:object="${ingredient}" method="post">
-        <input type="hidden" th:field="*{id}" />
-
-        <!-- Hidden input for product id -->
-        <input type="hidden" th:field="*{product.id}" />
-
+<div class="pl-5">
+    <h1 class="header">Изменение Сотрудника</h1>
+    <form action="#" th:action="@{/employee-edit/{employeeId}(employeeId=${employee.id})}" method="post" th:object="${employee}">
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="productName">Product:</label>
+            <label class="col-sm-2 col-form-label" for="name">Имя</label>
             <div class="col-sm-5">
-                <span class="form-control-plaintext" th:text="${ingredient.product.name}"></span>
+                <input required class="form-control" type="text" id="name" th:field="*{name}">
             </div>
         </div>
-
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="material">Material:</label>
+            <label class="col-sm-2 col-form-label" for="salary">Зарплата</label>
             <div class="col-sm-5">
-                <select class="form-control" id="material" name="material.id" th:field="*{material.id}">
-                    <option th:each="material : ${materials}" th:value="${material.id}" th:text="${material.name}"></option>
+                <input required class="form-control" type="text" id="salary" th:field="*{salary}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="address">Адрес</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="address" th:field="*{address}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="phone_number">Номер Телефона</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="phone_number" th:field="*{phone_number}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="positions">Должность</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="positions" th:field="${employee.position}">
+                    <option th:value="null"></option>
+                    <option th:each="position : ${positions}" th:value="${position.id}"
+                            th:text="${position.name}"></option>
                 </select>
             </div>
         </div>
-
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="quantity">Quantity:</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{quantity}" />
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-5">
-                <button type="submit" class="btn btn-success">Update Ingredient</button>
-            </div>
-        </div>
+        <button class="btn btn-success" type="submit" value="Сохранить">Сохранить</button>
     </form>
 </div>
 </body>

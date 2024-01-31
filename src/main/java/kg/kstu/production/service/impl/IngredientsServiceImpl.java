@@ -67,7 +67,6 @@ public class IngredientsServiceImpl implements IngredientsService {
         ingredientsRepository.save(ingredient);
     }
 
-
     /*private IngredientsDto mapToIngredientsDto(Ingredients ingredient) {
         return IngredientsDto.builder()
                 .id(ingredient.getId())

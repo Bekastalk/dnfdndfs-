@@ -14,9 +14,9 @@ public interface IngredientsService {
 
     void deleteIngredient(Long id);
 
-    Optional<Ingredient> findById(Long id);
-
     String updateIngredient(Ingredient ingredient);
+
+    Optional<Ingredient> findById(Long id);
 
     void save(Ingredient ingredient);
 }

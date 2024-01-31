@@ -62,16 +62,10 @@ public class IngredientController {
         }
     }
 
-
     // Метод для обработки создания ингредиента
     @PostMapping("/create")
     public String createIngredient(@ModelAttribute Ingredient ingredient) {
-        System.out.println("\n\n\n\n\n\nИнгредиент:\n\n\n\n\n\n\n");
-        System.out.println("ING: " + ingredient.getMaterial());
-        // Проверки и сохранение ингредиента
         ingredientsService.createIngredient(ingredient);
-
-        // Перенаправить на страницу со списком ингредиентов для выбранного продукта
         return "redirect:/ingredients/list/" + ingredient.getProduct().getId();
     }
 
@@ -79,7 +73,6 @@ public class IngredientController {
     @GetMapping("/update/{ingredientId}")
     public String showUpdateIngredientForm(@PathVariable Long ingredientId, Model model) {
         Optional<Ingredient> ingredientOptional = ingredientsService.findById(ingredientId);
-
 
         if (ingredientOptional.isPresent()) {
             Ingredient ingredient = ingredientOptional.get();
@@ -97,22 +90,6 @@ public class IngredientController {
         }
     }
 
-    /*
-    @RequestMapping(value = "/product-edit/{productId}", method = RequestMethod.GET)
-    public String productEdit(Model model, @PathVariable("productId") Long productId) {
-        Optional<Product> productOptional = productService.findById(productId);
-        if (productOptional.isPresent()) {
-            Product product = productOptional.get();
-            model.addAttribute("product", product);
-            model.addAttribute("unitOfMeasurements", unitOfMeasurementService.getAll());
-            return "editProduct";
-        } else {
-            // Обработка случая, когда продукт с заданным ID не найден
-            return "redirect:/product-list";
-        }
-    }
-     */
-
     @PostMapping("/update")
     public String updateIngredient(@ModelAttribute Ingredient ingredient) {
         // Проверки и сохранение ингредиента
@@ -122,79 +99,15 @@ public class IngredientController {
         return "redirect:/ingredients/list/" + ingredient.getProduct().getId();
     }
 
-    /*
-    @RequestMapping(value = "/product-edit/{productId}", method = RequestMethod.POST)
-    public String editById(@PathVariable("productId") Long productId, @ModelAttribute("product") Product product) {
-        product.setId(productId);
-        productService.updateProduct(product);
-        return "redirect:/product-list";
-    }
-     */
-
-
-    /*
-    @GetMapping("/create/{productId}")
-    public String showCreateIngredientForm(@PathVariable Long productId, Model model) {
-        model.addAttribute("ingredient", new Ingredient());
-        model.addAttribute("productId", productId);
-        // Добавьте другие атрибуты по необходимости
-        return "createIngredient";
-    }
-
-    @PostMapping("/create/{productId}")
-    public String createIngredient(@PathVariable Long productId, @ModelAttribute("ingredient") Ingredient ingredient) {
-        // Установите связь с продуктом
-        ingredient.setProduct(new Product(productId));
-        ingredientsService.createIngredient(ingredient);
-        return "redirect:/ingredients/list/" + productId;
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteIngredientById(@PathVariable Long id) {
-        // Необходимо сохранять информацию о продукте, к которому относится ингредиент
-        Long productId = ingredientsService.findById(id)
-                .map(ingredient -> ingredient.getProduct().getId())
-                .orElse(null);
-
-        ingredientsService.deleteIngredient(id);
-
-        if (productId != null) {
-            return "redirect:/ingredients/list/" + productId;
-        } else {
-            return "redirect:/ingredients/list"; // В случае ошибки
-        }
-    }
-
-    @GetMapping("/edit/{ingredientId}")
-    public String showEditIngredientForm(Model model, @PathVariable("ingredientId") Long ingredientId) {
-        Optional<Ingredient> ingredientOptional = ingredientsService.findById(ingredientId);
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteById(@PathVariable Long id) {
+        Optional<Ingredient> ingredientOptional = ingredientsService.findById(id);
         if (ingredientOptional.isPresent()) {
-            Ingredient ingredient = ingredientOptional.get();
-            model.addAttribute("ingredient", ingredient);
-            // Добавьте другие атрибуты по необходимости
-            return "editIngredient";
+            ingredientsService.deleteIngredient(id);
+            return "redirect:/ingredients/list/" + ingredientOptional.get().getProduct().getId();
         } else {
-            // Обработка случая, когда ингредиент с заданным ID не найден
-            return "redirect:/ingredients/list";
+            return "redirect:/products";
         }
     }
-
-    @PostMapping("/edit/{ingredientId}")
-    public String editIngredientById(@PathVariable("ingredientId") Long ingredientId,
-                                     @ModelAttribute("ingredient") Ingredient ingredient) {
-        // Необходимо сохранять информацию о продукте, к которому относится ингредиент
-        Long productId = ingredientsService.findById(ingredientId)
-                .map(ingr -> ingr.getProduct().getId())
-                .orElse(null);
-
-        ingredient.setId(ingredientId);
-        ingredientsService.updateIngredient(ingredient);
-
-        if (productId != null) {
-            return "redirect:/ingredients/list/" + productId;
-        } else {
-            return "redirect:/ingredients/list"; // В случае ошибки
-        }
-    }*/
 }
 

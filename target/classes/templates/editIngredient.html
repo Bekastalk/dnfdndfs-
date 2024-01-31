@@ -16,25 +16,45 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<h2>Edit Ingredient</h2>
+<div class="container mt-5">
+    <h1 class="header">Edit Ingredient</h1>
 
-<form th:action="@{/ingredients/update}" th:object="${ingredient}" method="post">
-    <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/ingredients/update}" th:object="${ingredient}" method="post">
+        <input type="hidden" th:field="*{id}" />
 
-    <!-- Hidden input for product id -->
-    <input type="hidden" th:field="*{product.id}" />
+        <!-- Hidden input for product id -->
+        <input type="hidden" th:field="*{product.id}" />
 
-    <label>Product: <span th:text="${ingredient.product.name}"></span></label><br/>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="productName">Product:</label>
+            <div class="col-sm-5">
+                <span class="form-control-plaintext" th:text="${ingredient.product.name}"></span>
+            </div>
+        </div>
 
-    <label for="material">Material:</label>
-    <select id="material" name="material.id" th:field="*{material.id}">
-        <option th:each="material : ${materials}" th:value="${material.id}" th:text="${material.name}"></option>
-    </select><br/>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="material">Material:</label>
+            <div class="col-sm-5">
+                <select class="form-control" id="material" name="material.id" th:field="*{material.id}">
+                    <option th:each="material : ${materials}" th:value="${material.id}" th:text="${material.name}"></option>
+                </select>
+            </div>
+        </div>
 
-    <label for="quantity">Quantity:</label>
-    <input type="text" id="quantity" name="quantity" th:field="*{quantity}" /><br/>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="quantity">Quantity:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="quantity" name="quantity" th:field="*{quantity}" />
+            </div>
+        </div>
 
-    <button type="submit">Update Ingredient</button>
-</form>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5">
+                <button type="submit" class="btn btn-success">Update Ingredient</button>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>

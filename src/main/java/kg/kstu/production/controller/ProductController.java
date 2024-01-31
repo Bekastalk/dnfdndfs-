@@ -23,11 +23,6 @@ public class ProductController {
     final ProductService productService;
     final UnitOfMeasurementService unitOfMeasurementService;
 
-    /*@RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home() {
-        return "home";
-    }*/
-
     @RequestMapping(value = "/product-list", method = RequestMethod.GET)
     public String getAllProduct(Model model) {
         model.addAttribute("products", productService.getAll());
