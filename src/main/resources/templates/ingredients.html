@@ -30,14 +30,23 @@
                 <th>Продукт</th>
                 <th>Материал</th>
                 <th>Количество</th>
+                <th>Действия</th> <!-- Добавлен заголовок для колонки с действиями -->
             </tr>
             </thead>
             <tbody>
             <tr scope="row" th:each="ingredient : ${ingredients}">
                 <td th:text="${ingredient.getId()}"></td>
-                <td th:text="${ingredient.getProduct().getName()}"></td>
+                <td>
+                    <!-- Проверка на null перед доступом к свойствам Product -->
+                    <span th:if="${ingredient.product != null}" th:text="${ingredient.getProduct().getName()}"></span>
+                </td>
                 <td th:text="${ingredient.getMaterial().getName()}"></td>
                 <td th:text="${ingredient.getQuantity()}"></td>
+                <td>
+                    <!-- Добавление кнопки для редактирования ингредиента -->
+                    <a th:href="@{/ingredients/update/{ingredientId}(ingredientId=${ingredient.getId()})}"
+                       class="btn btn-info btn-sm" role="button">Редактировать</a>
+                </td>
             </tr>
             </tbody>
         </table>

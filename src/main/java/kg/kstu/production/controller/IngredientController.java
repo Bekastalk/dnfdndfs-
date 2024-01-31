@@ -9,7 +9,6 @@ import kg.kstu.production.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -81,9 +80,13 @@ public class IngredientController {
     public String showUpdateIngredientForm(@PathVariable Long ingredientId, Model model) {
         Optional<Ingredient> ingredientOptional = ingredientsService.findById(ingredientId);
 
+
         if (ingredientOptional.isPresent()) {
             Ingredient ingredient = ingredientOptional.get();
             model.addAttribute("ingredient", ingredient);
+
+            Product product = ingredient.getProduct();
+            model.addAttribute("product", product);
 
             List<Material> materials = materialService.getAll(); // Получите список материалов
             model.addAttribute("materials", materials);
@@ -112,8 +115,6 @@ public class IngredientController {
 
     @PostMapping("/update")
     public String updateIngredient(@ModelAttribute Ingredient ingredient) {
-        System.out.println("\n\n\n\n\n\nИнгредиент:\n\n\n\n\n\n\n");
-        System.out.println("ING: " + ingredient.getMaterial());
         // Проверки и сохранение ингредиента
         ingredientsService.updateIngredient(ingredient);
 
