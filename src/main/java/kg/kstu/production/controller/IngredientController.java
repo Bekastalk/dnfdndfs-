@@ -76,6 +76,61 @@ public class IngredientController {
         return "redirect:/ingredients/list/" + ingredient.getProduct().getId();
     }
 
+    // Метод для отображения формы создания ингредиента для конкретного продукта
+    @GetMapping("/update/{ingredientId}")
+    public String showUpdateIngredientForm(@PathVariable Long ingredientId, Model model) {
+        Optional<Ingredient> ingredientOptional = ingredientsService.findById(ingredientId);
+
+        if (ingredientOptional.isPresent()) {
+            Ingredient ingredient = ingredientOptional.get();
+            model.addAttribute("ingredient", ingredient);
+
+            List<Material> materials = materialService.getAll(); // Получите список материалов
+            model.addAttribute("materials", materials);
+
+            return "editIngredient";
+        } else {
+            return "redirect:/products";
+        }
+    }
+
+    /*
+    @RequestMapping(value = "/product-edit/{productId}", method = RequestMethod.GET)
+    public String productEdit(Model model, @PathVariable("productId") Long productId) {
+        Optional<Product> productOptional = productService.findById(productId);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            model.addAttribute("product", product);
+            model.addAttribute("unitOfMeasurements", unitOfMeasurementService.getAll());
+            return "editProduct";
+        } else {
+            // Обработка случая, когда продукт с заданным ID не найден
+            return "redirect:/product-list";
+        }
+    }
+     */
+
+    @PostMapping("/update")
+    public String updateIngredient(@ModelAttribute Ingredient ingredient) {
+        System.out.println("\n\n\n\n\n\nИнгредиент:\n\n\n\n\n\n\n");
+        System.out.println("ING: " + ingredient.getMaterial());
+        // Проверки и сохранение ингредиента
+        ingredientsService.updateIngredient(ingredient);
+
+        // Перенаправить на страницу со списком ингредиентов для выбранного продукта
+        return "redirect:/ingredients/list/" + ingredient.getProduct().getId();
+    }
+
+    /*
+    @RequestMapping(value = "/product-edit/{productId}", method = RequestMethod.POST)
+    public String editById(@PathVariable("productId") Long productId, @ModelAttribute("product") Product product) {
+        product.setId(productId);
+        productService.updateProduct(product);
+        return "redirect:/product-list";
+    }
+     */
+
+
     /*
     @GetMapping("/create/{productId}")
     public String showCreateIngredientForm(@PathVariable Long productId, Model model) {
