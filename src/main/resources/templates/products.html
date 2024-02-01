@@ -49,7 +49,7 @@
                 <td th:text="${product.getAmount()}"></td>
                 <td>
                     <center>
-                        <a th:href="@{/product-delete/{id}(id=${product.getId()})}">
+                        <a th:href="@{/product-delete/{id}(id=${product.getId()})}" onclick="return confirm('Вы уверены, что хотите удалить продукт?');">
                             <button class="btn-del">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
                                      fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@
                                 </svg>
                             </button>
                         </a>
-                        <a th:href="@{/ingredients/list/{productId}(productId=${product.id})}" class="btn-view-ingredients ml-2">
+                        <a th:href="@{/ingredients/list/{productId}(productId=${product.id})}" class="btn-view-ingredients ml-2" style="color: black;">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search"
                                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -75,7 +75,7 @@
                                 <path fill-rule="evenodd"
                                       d="M15.742 14.344a1 1 0 0 0-1.415-1.414l-2.793 2.793a7.5 7.5 0 0 0 1.415-1.414l2.793-2.793a1 1 0 0 0 1.414 1.414l-2.793 2.793zM12 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                             </svg>
-                            <span th:text="'Просмотр ингредиентов ' + ${product.getName()}"></span>
+                            <span>Ингредиенты</span>
                         </a>
                     </center>
                 </td>
