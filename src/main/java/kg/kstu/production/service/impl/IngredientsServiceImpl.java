@@ -4,6 +4,7 @@ import kg.kstu.production.entity.Ingredient;
 import kg.kstu.production.repository.IngredientsRepository;
 import kg.kstu.production.service.IngredientsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,14 +52,21 @@ public class IngredientsServiceImpl implements IngredientsService {
     public String updateIngredient(Ingredient ingredient) {
         boolean contains = ingredientsRepository.findAll()
                 .stream()
-                .filter(i -> Objects.equals(i.getProduct().getId(), ingredient.getProduct().getId()) /*&&
-                        !Objects.equals(i.getId(), ingredient.getId())*/)
+                .filter(i -> Objects.equals(i.getProduct().getId(), ingredient.getProduct().getId()))
                 .anyMatch(i -> Objects.equals(i.getMaterial().getId(), ingredient.getMaterial().getId()));
         if (!contains) {
             ingredientsRepository.save(ingredient);
             return "The product added";
         } else {
-            return "The product already contains";
+            Optional<Ingredient> ingredientToUpdateOptional = ingredientsRepository.findById(ingredient.getId());
+            if (ingredientToUpdateOptional.isEmpty()) {
+                return "Ingredient not found";
+            } else {
+                Ingredient ingredientToUpdate = ingredientToUpdateOptional.get();
+                ingredientToUpdate.setQuantity(ingredient.getQuantity());
+                ingredientsRepository.save(ingredientToUpdate);
+                return "The product already contains";
+            }
         }
     }
 

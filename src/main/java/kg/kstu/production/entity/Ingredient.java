@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@Table(name = "ingredients")
+@Table(name = "ingredients", uniqueConstraints = {@UniqueConstraint(columnNames = {"product_id", "material_id"})})
 @ToString
 public class Ingredient {
     @Id
