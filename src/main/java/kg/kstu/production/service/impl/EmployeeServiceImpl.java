@@ -8,8 +8,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getAll() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Employee::getName))
+                .collect(Collectors.toList());
     }
 
     @Override

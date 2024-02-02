@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class IngredientsServiceImpl implements IngredientsService {
         return ingredientsRepository.findAll()
                 .stream()
                 .filter(i -> Objects.equals(i.getProduct().getId(), productId))
+                .sorted(Comparator.comparing(i -> i.getMaterial().getName()))
                 .collect(Collectors.toList());
     }
 

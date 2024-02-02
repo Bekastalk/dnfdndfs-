@@ -1,6 +1,7 @@
 package kg.kstu.production.service.impl;
 
 import jakarta.transaction.Transactional;
+import kg.kstu.production.entity.Employee;
 import kg.kstu.production.entity.Ingredient;
 import kg.kstu.production.entity.Product;
 import kg.kstu.production.repository.IngredientsRepository;
@@ -10,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.beans.Transient;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,7 +25,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return productRepository.findAll();
+        return productRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Product::getName))
+                .collect(Collectors.toList());
     }
 
     @Override
