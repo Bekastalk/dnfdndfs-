@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class IngredientsServiceImpl implements IngredientsService {
     @Autowired
     private IngredientsRepository ingredientsRepository;
+
     @Override
     public List<Ingredient> getAll(Long productId) {
         return ingredientsRepository.findAll()

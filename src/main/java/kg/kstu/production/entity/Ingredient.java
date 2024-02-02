@@ -9,7 +9,6 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "ingredients", uniqueConstraints = {@UniqueConstraint(columnNames = {"product_id", "material_id"})})
-@ToString
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

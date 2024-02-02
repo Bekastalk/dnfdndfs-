@@ -19,8 +19,12 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-6 text-right">
-            <a href="/employee-list" class="btn btn-primary">Список Работников</a>
-            <a href="/product-list" class="btn btn-info ml-2">Список Продуктов</a>
+            <div class="btn-group">
+                <a href="/employee-list" class="btn btn-secondary">Список Работников</a>
+                <a href="/product-list" class="btn btn-secondary">Список Продуктов</a>
+                <a href="/material/list" class="btn btn-secondary">Список Материалов</a>
+                <a href="/material/purchase" class="btn btn-secondary">Создать Закупку</a>
+            </div>
         </div>
     </div>
 <div th:switch="${products}" class="pl-3">
