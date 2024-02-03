@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.49">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>2387</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2482</IntrospectionStateNumber>
       <ServerVersion>15.3</ServerVersion>
       <StartupTime>1706443703</StartupTime>
       <TimeZones>true ACDT
@@ -801,7 +801,7 @@ false Zulu
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>2387</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2482</IntrospectionStateNumber>
       <ObjectId>35427</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4243,9 +4243,9 @@ false Zulu
     <schema id="268" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>2387</IntrospectionStateNumber>
-      <IntrospectionTimestamp>2024-02-02.19:28:22.014</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2024-02-02.13:28:24</LocalIntrospectionTimestamp>
+      <IntrospectionStateNumber>2482</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2024-02-03.11:08:05.292</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2024-02-03.05:08:06</LocalIntrospectionTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4253,7 +4253,7 @@ false Zulu
     <sequence id="269" parent="268" name="budget_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>36311</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(3)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2381</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4261,7 +4261,7 @@ false Zulu
     <sequence id="270" parent="268" name="employees_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>36200</ObjectId>
-      <SequenceIdentity>1(13)</SequenceIdentity>
+      <SequenceIdentity>1(15)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2203</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4277,7 +4277,7 @@ false Zulu
     <sequence id="272" parent="268" name="material_purchase_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>36318</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(6)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2382</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4285,7 +4285,7 @@ false Zulu
     <sequence id="273" parent="268" name="materials_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>36228</ObjectId>
-      <SequenceIdentity>1(8)</SequenceIdentity>
+      <SequenceIdentity>1(9)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2222</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4298,15 +4298,23 @@ false Zulu
       <StateNumber>2204</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="275" parent="268" name="products_id_seq">
+    <sequence id="275" parent="268" name="product_sales_id_seq">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>36395</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>2469</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="276" parent="268" name="products_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>36235</ObjectId>
-      <SequenceIdentity>1(11)</SequenceIdentity>
+      <SequenceIdentity>1(12)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2223</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="276" parent="268" name="units_of_measurement_id_seq">
+    <sequence id="277" parent="268" name="units_of_measurement_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>36242</ObjectId>
       <SequenceIdentity>1(8)</SequenceIdentity>
@@ -4314,55 +4322,61 @@ false Zulu
       <StateNumber>2224</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="277" parent="268" name="budget">
+    <table id="278" parent="268" name="budget">
       <ObjectId>36312</ObjectId>
-      <StateNumber>2381</StateNumber>
+      <StateNumber>2468</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="278" parent="268" name="employees">
+    <table id="279" parent="268" name="employees">
       <ObjectId>36201</ObjectId>
       <StateNumber>2205</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="279" parent="268" name="ingredients">
+    <table id="280" parent="268" name="ingredients">
       <ObjectId>36222</ObjectId>
       <StateNumber>2225</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="280" parent="268" name="material_purchase">
+    <table id="281" parent="268" name="material_purchase">
       <ObjectId>36319</ObjectId>
       <StateNumber>2385</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="281" parent="268" name="materials">
+    <table id="282" parent="268" name="materials">
       <ObjectId>36229</ObjectId>
       <StateNumber>2225</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="282" parent="268" name="positions">
+    <table id="283" parent="268" name="positions">
       <ObjectId>36210</ObjectId>
       <StateNumber>2205</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="283" parent="268" name="products">
+    <table id="284" parent="268" name="product_sales">
+      <ObjectId>36396</ObjectId>
+      <StateNumber>2472</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="285" parent="268" name="products">
       <ObjectId>36236</ObjectId>
       <StateNumber>2226</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="284" parent="268" name="units_of_measurement">
+    <table id="286" parent="268" name="units_of_measurement">
       <ObjectId>36243</ObjectId>
       <StateNumber>2227</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="285" parent="277" name="id">
+    <column id="287" parent="278" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;budget_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4371,13 +4385,19 @@ false Zulu
       <SequenceId>36311</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="286" parent="277" name="amount">
+    <column id="288" parent="278" name="amount">
       <DasType>real|0s</DasType>
       <Position>2</Position>
       <StateNumber>2381</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <index id="287" parent="277" name="budget_pkey">
+    <column id="289" parent="278" name="percent">
+      <DasType>real|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>2468</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <index id="290" parent="278" name="budget_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36316</ObjectId>
@@ -4386,14 +4406,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="288" parent="277" name="budget_pkey">
+    <key id="291" parent="278" name="budget_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36317</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2381</StateNumber>
       <UnderlyingIndexId>36316</UnderlyingIndexId>
     </key>
-    <column id="289" parent="278" name="id">
+    <column id="292" parent="279" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;employees_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4402,56 +4422,56 @@ false Zulu
       <SequenceId>36200</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="290" parent="278" name="address">
+    <column id="293" parent="279" name="address">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="291" parent="278" name="cts">
+    <column id="294" parent="279" name="cts">
       <DasType>timestamp(6)|0s</DasType>
       <Position>3</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="292" parent="278" name="name">
+    <column id="295" parent="279" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="293" parent="278" name="phone_number">
+    <column id="296" parent="279" name="phone_number">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="294" parent="278" name="salary">
+    <column id="297" parent="279" name="salary">
       <DasType>real|0s</DasType>
       <Position>6</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="295" parent="278" name="uts">
+    <column id="298" parent="279" name="uts">
       <DasType>timestamp(6)|0s</DasType>
       <Position>7</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="296" parent="278" name="position_id">
+    <column id="299" parent="279" name="position_id">
       <DasType>bigint|0s</DasType>
       <Position>8</Position>
       <StateNumber>2203</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="297" parent="278" name="fkngcpgx7fx5kednw3m7u0u8of3">
+    <foreign-key id="300" parent="279" name="fkngcpgx7fx5kednw3m7u0u8of3">
       <ColNames>position_id</ColNames>
       <ObjectId>36216</ObjectId>
       <StateNumber>2205</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36210</RefTableId>
     </foreign-key>
-    <index id="298" parent="278" name="employees_pkey">
+    <index id="301" parent="279" name="employees_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36207</ObjectId>
@@ -4460,14 +4480,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="299" parent="278" name="employees_pkey">
+    <key id="302" parent="279" name="employees_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36208</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2203</StateNumber>
       <UnderlyingIndexId>36207</UnderlyingIndexId>
     </key>
-    <column id="300" parent="279" name="id">
+    <column id="303" parent="280" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;ingredients_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4476,39 +4496,39 @@ false Zulu
       <SequenceId>36221</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="301" parent="279" name="quantity">
+    <column id="304" parent="280" name="quantity">
       <DasType>real|0s</DasType>
       <Position>2</Position>
       <StateNumber>2221</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="302" parent="279" name="material_id">
+    <column id="305" parent="280" name="material_id">
       <DasType>bigint|0s</DasType>
       <Position>3</Position>
       <StateNumber>2221</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="303" parent="279" name="product_id">
+    <column id="306" parent="280" name="product_id">
       <DasType>bigint|0s</DasType>
       <Position>4</Position>
       <StateNumber>2221</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="304" parent="279" name="fkod748c4qm9mygbt8xtqh9bkrf">
+    <foreign-key id="307" parent="280" name="fkod748c4qm9mygbt8xtqh9bkrf">
       <ColNames>material_id</ColNames>
       <ObjectId>36249</ObjectId>
       <StateNumber>2225</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36229</RefTableId>
     </foreign-key>
-    <foreign-key id="305" parent="279" name="fk34jbb91wprx6ys2443vf43cxj">
+    <foreign-key id="308" parent="280" name="fk34jbb91wprx6ys2443vf43cxj">
       <ColNames>product_id</ColNames>
       <ObjectId>36254</ObjectId>
       <StateNumber>2226</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36236</RefTableId>
     </foreign-key>
-    <index id="306" parent="279" name="ingredients_pkey">
+    <index id="309" parent="280" name="ingredients_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36226</ObjectId>
@@ -4517,14 +4537,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="307" parent="279" name="ingredients_pkey">
+    <key id="310" parent="280" name="ingredients_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36227</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2221</StateNumber>
       <UnderlyingIndexId>36226</UnderlyingIndexId>
     </key>
-    <column id="308" parent="280" name="id">
+    <column id="311" parent="281" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;material_purchase_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4533,51 +4553,51 @@ false Zulu
       <SequenceId>36318</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="309" parent="280" name="amount">
+    <column id="312" parent="281" name="amount">
       <DasType>real|0s</DasType>
       <Position>2</Position>
       <StateNumber>2382</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="310" parent="280" name="p_date">
+    <column id="313" parent="281" name="p_date">
       <DasType>timestamp(6)|0s</DasType>
       <Position>3</Position>
       <StateNumber>2382</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="311" parent="280" name="quantity">
+    <column id="314" parent="281" name="quantity">
       <DasType>real|0s</DasType>
       <Position>4</Position>
       <StateNumber>2382</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="312" parent="280" name="employee_id">
+    <column id="315" parent="281" name="employee_id">
       <DasType>bigint|0s</DasType>
       <Position>5</Position>
       <StateNumber>2382</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="313" parent="280" name="material_id">
+    <column id="316" parent="281" name="material_id">
       <DasType>bigint|0s</DasType>
       <Position>6</Position>
       <StateNumber>2382</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="314" parent="280" name="fk9y410i8g8g57kh480075xjiv0">
+    <foreign-key id="317" parent="281" name="fk9y410i8g8g57kh480075xjiv0">
       <ColNames>employee_id</ColNames>
       <ObjectId>36327</ObjectId>
       <StateNumber>2385</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36201</RefTableId>
     </foreign-key>
-    <foreign-key id="315" parent="280" name="fk9w6dbkvxony7yr6w4mlmvfawn">
+    <foreign-key id="318" parent="281" name="fk9w6dbkvxony7yr6w4mlmvfawn">
       <ColNames>material_id</ColNames>
       <ObjectId>36332</ObjectId>
       <StateNumber>2386</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36229</RefTableId>
     </foreign-key>
-    <index id="316" parent="280" name="material_purchase_pkey">
+    <index id="319" parent="281" name="material_purchase_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36323</ObjectId>
@@ -4586,14 +4606,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="317" parent="280" name="material_purchase_pkey">
+    <key id="320" parent="281" name="material_purchase_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36324</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2382</StateNumber>
       <UnderlyingIndexId>36323</UnderlyingIndexId>
     </key>
-    <column id="318" parent="281" name="id">
+    <column id="321" parent="282" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;materials_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4602,38 +4622,38 @@ false Zulu
       <SequenceId>36228</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="319" parent="281" name="amount">
+    <column id="322" parent="282" name="amount">
       <DasType>real|0s</DasType>
       <Position>2</Position>
       <StateNumber>2222</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="320" parent="281" name="name">
+    <column id="323" parent="282" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
       <StateNumber>2222</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="321" parent="281" name="quantity">
+    <column id="324" parent="282" name="quantity">
       <DasType>real|0s</DasType>
       <Position>4</Position>
       <StateNumber>2222</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="322" parent="281" name="unit_of_measurement_id">
+    <column id="325" parent="282" name="unit_of_measurement_id">
       <DasType>bigint|0s</DasType>
       <Position>5</Position>
       <StateNumber>2222</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="323" parent="281" name="fkcecxndmv1ldf0yyx2nno31vbp">
+    <foreign-key id="326" parent="282" name="fkcecxndmv1ldf0yyx2nno31vbp">
       <ColNames>unit_of_measurement_id</ColNames>
       <ObjectId>36259</ObjectId>
       <StateNumber>2227</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36243</RefTableId>
     </foreign-key>
-    <index id="324" parent="281" name="materials_pkey">
+    <index id="327" parent="282" name="materials_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36233</ObjectId>
@@ -4642,14 +4662,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="325" parent="281" name="materials_pkey">
+    <key id="328" parent="282" name="materials_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36234</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2222</StateNumber>
       <UnderlyingIndexId>36233</UnderlyingIndexId>
     </key>
-    <column id="326" parent="282" name="id">
+    <column id="329" parent="283" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;positions_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4658,13 +4678,13 @@ false Zulu
       <SequenceId>36209</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="327" parent="282" name="position">
+    <column id="330" parent="283" name="position">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>2204</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="328" parent="282" name="positions_pkey">
+    <index id="331" parent="283" name="positions_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36214</ObjectId>
@@ -4673,14 +4693,83 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="329" parent="282" name="positions_pkey">
+    <key id="332" parent="283" name="positions_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36215</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2204</StateNumber>
       <UnderlyingIndexId>36214</UnderlyingIndexId>
     </key>
-    <column id="330" parent="283" name="id">
+    <column id="333" parent="284" name="id">
+      <DasType>bigint|0s</DasType>
+      <DefaultExpression>nextval(&apos;product_sales_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>2469</StateNumber>
+      <SequenceId>36395</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="334" parent="284" name="amount">
+      <DasType>real|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>2469</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <column id="335" parent="284" name="quantity">
+      <DasType>real|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>2469</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <column id="336" parent="284" name="s_date">
+      <DasType>timestamp(6)|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>2469</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="337" parent="284" name="employee_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>2469</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="338" parent="284" name="product_id">
+      <DasType>bigint|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>2469</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="339" parent="284" name="fkri8g2i18w1gp1wo6x3524unt9">
+      <ColNames>employee_id</ColNames>
+      <ObjectId>36404</ObjectId>
+      <StateNumber>2472</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>36201</RefTableId>
+    </foreign-key>
+    <foreign-key id="340" parent="284" name="fk2t8pfarluqlwau6jqljopaafb">
+      <ColNames>product_id</ColNames>
+      <ObjectId>36409</ObjectId>
+      <StateNumber>2473</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>36236</RefTableId>
+    </foreign-key>
+    <index id="341" parent="284" name="product_sales_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>36400</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2469</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="342" parent="284" name="product_sales_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>36401</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2469</StateNumber>
+      <UnderlyingIndexId>36400</UnderlyingIndexId>
+    </key>
+    <column id="343" parent="285" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;products_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4689,38 +4778,38 @@ false Zulu
       <SequenceId>36235</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="331" parent="283" name="amount">
+    <column id="344" parent="285" name="amount">
       <DasType>real|0s</DasType>
       <Position>2</Position>
       <StateNumber>2223</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="332" parent="283" name="name">
+    <column id="345" parent="285" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
       <StateNumber>2223</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="333" parent="283" name="quantity">
+    <column id="346" parent="285" name="quantity">
       <DasType>real|0s</DasType>
       <Position>4</Position>
       <StateNumber>2223</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="334" parent="283" name="unit_of_measurement_id">
+    <column id="347" parent="285" name="unit_of_measurement_id">
       <DasType>bigint|0s</DasType>
       <Position>5</Position>
       <StateNumber>2223</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="335" parent="283" name="fk1ybt0h1nsxs2sfo7a0hn785vk">
+    <foreign-key id="348" parent="285" name="fk1ybt0h1nsxs2sfo7a0hn785vk">
       <ColNames>unit_of_measurement_id</ColNames>
       <ObjectId>36264</ObjectId>
       <StateNumber>2228</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>36243</RefTableId>
     </foreign-key>
-    <index id="336" parent="283" name="products_pkey">
+    <index id="349" parent="285" name="products_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36240</ObjectId>
@@ -4729,14 +4818,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="337" parent="283" name="products_pkey">
+    <key id="350" parent="285" name="products_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36241</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2223</StateNumber>
       <UnderlyingIndexId>36240</UnderlyingIndexId>
     </key>
-    <column id="338" parent="284" name="id">
+    <column id="351" parent="286" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;units_of_measurement_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4745,13 +4834,13 @@ false Zulu
       <SequenceId>36242</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="339" parent="284" name="name">
+    <column id="352" parent="286" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
       <StateNumber>2224</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="340" parent="284" name="units_of_measurement_pkey">
+    <index id="353" parent="286" name="units_of_measurement_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36247</ObjectId>
@@ -4760,7 +4849,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="341" parent="284" name="units_of_measurement_pkey">
+    <key id="354" parent="286" name="units_of_measurement_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>36248</ObjectId>
       <Primary>1</Primary>

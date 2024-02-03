@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface BudgetRepository extends JpaRepository<Budget, Long> {
     Optional<Budget> findByAmountGreaterThan(Float amount);
+    Optional<Budget> findFirstByOrderByIdAsc();
 }

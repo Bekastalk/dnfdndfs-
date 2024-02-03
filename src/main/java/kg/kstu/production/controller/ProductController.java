@@ -1,19 +1,19 @@
 package kg.kstu.production.controller;
 
+import kg.kstu.production.entity.MaterialPurchase;
 import kg.kstu.production.entity.Product;
-import kg.kstu.production.service.ProductService;
-import kg.kstu.production.service.UnitOfMeasurementService;
+import kg.kstu.production.entity.ProductSale;
+import kg.kstu.production.service.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Controller
@@ -22,10 +22,14 @@ import java.util.Optional;
 public class ProductController {
     final ProductService productService;
     final UnitOfMeasurementService unitOfMeasurementService;
+    final EmployeeService employeeService;
+    final ProductSalesService salesService;
+    final BudgetService budgetService;
 
     @RequestMapping(value = "/product-list", method = RequestMethod.GET)
     public String getAllProduct(Model model) {
         model.addAttribute("products", productService.getAll());
+        model.addAttribute("budgets", budgetService.getBudget());
         return "products";
     }
 
@@ -68,6 +72,21 @@ public class ProductController {
     public String editById(@PathVariable("productId") Long productId, @ModelAttribute("product") Product product) {
         product.setId(productId);
         productService.updateProduct(product);
+        return "redirect:/product-list";
+    }
+
+    @GetMapping(value = "/product/sale")
+    public String saleProduct(Model model) {
+        model.addAttribute("products", productService.getAll());
+        model.addAttribute("employees", employeeService.getAll());
+        model.addAttribute("thisTime", LocalDateTime.now());
+        model.addAttribute("productSale", new ProductSale());
+        return "createSale";
+    }
+
+    @PostMapping(value = "/product/create-sale")
+    public String createPurchase(ProductSale sale) {
+        salesService.create(sale);
         return "redirect:/product-list";
     }
 }
