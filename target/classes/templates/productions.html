@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Productions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+                <a href="/employee-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Работников</a>
+                <a href="/product-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Продуктов</a>
+                <a href="/material/list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Материалов</a>
+            </div>
+        </div>
+        <div class="col-md-6 text-right">
+            <h5>Бюджет</h5>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="budget : ${budgets}" th:text="${budget.amount}"></li>
+            </ul>
+        </div>
+    </div>
+    <h2>История Производства</h2>
+    <div class="mb-4">
+        <a href="/product/create" class="btn btn-outline-success" role="button" aria-disabled="true">Создание продукта</a>
+        <a href="/product/sale" class="btn btn-outline-success" role="button" aria-disabled="true">Продажа</a>
+        <a href="/product/list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Продаж</a>
+        <a href="/product/production/create" class="btn btn-outline-success" role="button" aria-disabled="true">Производство</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Production ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Production Date</th>
+            <th>Employee</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="production : ${productions}">
+            <td th:text="${production.id}"></td>
+            <td th:text="${production.product.name}"></td>
+            <td th:text="${production.quantity}"></td>
+            <td th:text="${production.pDate}"></td>
+            <td th:text="${production.employee.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product Production</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-3">
+    <h2>Create Product Production</h2>
+
+    <!-- Вывод сообщения об ошибке -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <strong th:text="${errorMessage}"></strong>
+    </div>
+
+    <form action="/product/production/save" method="post">
+        <div class="form-group">
+            <label for="product">Product</label>
+            <select class="form-control" id="product" name="product.id">
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" id="quantity" name="quantity" required>
+        </div>
+        <div class="form-group">
+            <label for="pDate">Production Date</label>
+            <input type="datetime-local" class="form-control" id="pDate" name="pDate" value="${thisTime}" required>
+        </div>
+        <div class="form-group">
+            <label for="employee">Employee</label>
+            <select class="form-control" id="employee" name="employee.id">
+                <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>

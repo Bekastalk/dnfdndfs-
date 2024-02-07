@@ -17,7 +17,6 @@ public class ProductProduction {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = true)
-    @Column(name = "product")
     private Product product;
 
     @Column(name = "quantity")
@@ -28,6 +27,5 @@ public class ProductProduction {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = true)
-    @Column(name = "employee")
     private Employee employee;
 }
