@@ -30,6 +30,12 @@ public class MaterialController {
         return "materials";
     }
 
+    @GetMapping(value = "/purchase-list")
+    public String getPurchaseList(Model model) {
+        model.addAttribute("purchases", materialPurchaseService.getAll());
+        return "purchases";
+    }
+
     @GetMapping(value = "/purchase")
     public String purchaseMaterial(Model model) {
         model.addAttribute("materials", materialService.getAll());

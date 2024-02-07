@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список покупок материалов</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Список покупок материалов</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Материал</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+            <th>Дата покупки</th>
+            <th>Сотрудник</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Здесь будет вывод списка покупок -->
+        <!-- Используйте Thymeleaf для итерации по списку покупок -->
+        <tr th:each="purchase, iterStat : ${purchases}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${purchase.material.name}"></td>
+            <td th:text="${purchase.quantity}"></td>
+            <td th:text="${purchase.amount}"></td>
+            <td th:text="${purchase.purchaseDate}"></td>
+            <td th:text="${purchase.employee.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
