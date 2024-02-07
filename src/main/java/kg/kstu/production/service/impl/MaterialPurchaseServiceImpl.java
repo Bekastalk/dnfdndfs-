@@ -1,7 +1,6 @@
 package kg.kstu.production.service.impl;
 
 import kg.kstu.production.entity.Budget;
-import kg.kstu.production.entity.Employee;
 import kg.kstu.production.entity.Material;
 import kg.kstu.production.entity.MaterialPurchase;
 import kg.kstu.production.repository.BudgetRepository;
@@ -51,6 +50,6 @@ public class MaterialPurchaseServiceImpl implements MaterialPurchaseService {
             budgetRepository.save(updatedBudget);
             return "Done";
         }
-        return null;
+        return "null";
     }
 }

@@ -27,12 +27,14 @@ public class MaterialController {
     @GetMapping(value = "/list")
     public String getAllEmployee(Model model) {
         model.addAttribute("materials", materialService.getAll());
+        model.addAttribute("budgets", budgetRepository.findAll());
         return "materials";
     }
 
     @GetMapping(value = "/purchase-list")
     public String getPurchaseList(Model model) {
         model.addAttribute("purchases", materialPurchaseService.getAll());
+        model.addAttribute("budgets", budgetRepository.findAll());
         return "purchases";
     }
 
@@ -47,8 +49,19 @@ public class MaterialController {
     }
 
     @PostMapping(value = "/create-purchase")
-    public String createPurchase(MaterialPurchase purchase) {
-        materialPurchaseService.create(purchase);
-        return "redirect:/material/list";
+    public String createPurchase(MaterialPurchase purchase, Model model) {
+        String result = materialPurchaseService.create(purchase);
+        if (result.equals("Done")) {
+            return "redirect:/material/purchase-list";
+        } else if (result.equals("null")) {
+            model.addAttribute("errorMessage", "Недостаточно средств для закупки");
+            model.addAttribute("materials", materialService.getAll());
+            model.addAttribute("employees", employeeService.getAll());
+            model.addAttribute("thisTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
+            model.addAttribute("budgets", budgetRepository.findAll());
+            model.addAttribute("materialPurchase", new MaterialPurchase());
+            return "createPurchase";
+        }
+        return result;
     }
 }

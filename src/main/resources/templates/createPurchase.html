@@ -19,12 +19,19 @@
 <div class="container mt-3">
     <div class="pl-5">
         <div class="position-fixed" style="top: 0; right: 0; padding: 10px; background-color: #d6d8db; border: 1px solid #d6d8db;">
-            <h5>Информация о бюджете</h5>
+            <h5>Бюджет</h5>
             <ul class="list-group">
                 <li class="list-group-item" th:each="budget : ${budgets}" th:text="${budget.amount}"></li>
             </ul>
         </div>
         <h1 class="header">Добавление Закупки Материала</h1>
+
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+            <strong th:text="${errorMessage}"></strong>
+        </div>
+
+        <form action="#" th:action="@{/material/create-purchase}" method="post" th:object="${materialPurchase}">
+
         <form action="#" th:action="@{/material/create-purchase}" method="post" th:object="${materialPurchase}">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="material">Материал</label>

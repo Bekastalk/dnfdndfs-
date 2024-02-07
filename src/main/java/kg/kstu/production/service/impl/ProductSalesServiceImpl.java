@@ -10,7 +10,10 @@ import kg.kstu.production.service.ProductSalesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,13 @@ public class ProductSalesServiceImpl implements ProductSalesService {
     private final BudgetRepository budgetRepository;
     private final ProductRepository productRepository;
 
+    @Override
+    public List<ProductSale> getAll() {
+        return salesRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(ProductSale::getSalesDate))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public String create(ProductSale sale) {
@@ -45,6 +55,6 @@ public class ProductSalesServiceImpl implements ProductSalesService {
                 }
             }
         }
-        return null;
+        return "null";
     }
 }

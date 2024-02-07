@@ -18,20 +18,26 @@
 <body>
 <div class="container mt-3">
     <div class="row">
-        <div class="col-md-6 text-right">
+        <div class="col-md-6">
             <div class="btn-group">
-                <a href="/employee-list" class="btn btn-secondary">Список Работников</a>
-                <a href="/product-list" class="btn btn-secondary">Список Продуктов</a>
-                <a href="/material/list" class="btn btn-secondary">Список Материалов</a>
-                <a href="/material/purchase" class="btn btn-secondary">Создать Закупку</a>
-                <a href="/product/sale" class="btn btn-secondary">Добавить Продажу</a>
+                <a href="/employee-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Работников</a>
+                <a href="/product-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Продуктов</a>
+                <a href="/material/list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Материалов</a>
             </div>
+        </div>
+        <div class="col-md-6 text-right">
+            <h5>Бюджет</h5>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="budget : ${budgets}" th:text="${budget.amount}"></li>
+            </ul>
         </div>
     </div>
 <div th:switch="${products}" class="pl-3">
     <h1 class="header">Продукты</h1>
     <div class="mb-4">
         <a href="/product/create" class="btn btn-outline-success" role="button" aria-disabled="true">Создание продукта</a>
+        <a href="/product/sale" class="btn btn-outline-success" role="button" aria-disabled="true">Продажа</a>
+        <a href="/product/list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Продаж</a>
     </div>
     <div th:case="*">
         <table class="table">

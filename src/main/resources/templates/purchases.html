@@ -8,8 +8,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn-group">
+            <a href="/employee-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Работников</a>
+            <a href="/product-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Продуктов</a>
+        </div>
+    </div>
+    <div class="col-md-6 text-right">
+        <h5>Бюджет</h5>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="budget : ${budgets}" th:text="${budget.amount}"></li>
+        </ul>
+    </div>
+</div>
 <div class="container">
-    <h1>Список покупок материалов</h1>
+    <h1>Список закупки материалов</h1>
+    <div class="mb-4">
+        <a href="/material/create-purchase" class="btn btn-outline-success" role="button" aria-disabled="true">Закупить Материал</a>
+        <a href="/material/list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Материалов</a>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -22,8 +40,6 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Здесь будет вывод списка покупок -->
-        <!-- Используйте Thymeleaf для итерации по списку покупок -->
         <tr th:each="purchase, iterStat : ${purchases}">
             <td th:text="${iterStat.count}"></td>
             <td th:text="${purchase.material.name}"></td>
