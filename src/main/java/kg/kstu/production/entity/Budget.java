@@ -18,4 +18,7 @@ public class Budget {
 
     @Column(name = "percent")
     private Float percent;
+
+    @Column(name = "bodus")
+    private Float bonus;
 }

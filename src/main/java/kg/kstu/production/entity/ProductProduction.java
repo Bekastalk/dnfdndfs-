@@ -22,6 +22,9 @@ public class ProductProduction {
     @Column(name = "quantity")
     private Float quantity;
 
+    @Column(name = "amount")
+    private Float amount;
+
     @Column(name = "p_date")
     private LocalDateTime pDate;
 

@@ -37,11 +37,11 @@ public class ProductSalesServiceImpl implements ProductSalesService {
             Product product = productOptional.get();
 
             if(product.getQuantity() >= sale.getQuantity()) {
+                float amount = product.getAmount() / product.getQuantity() * sale.getQuantity();
                 product.setQuantity(product.getQuantity() - sale.getQuantity());
 
-                float amount = product.getAmount() * sale.getQuantity();
                 Optional<Budget> budgetOptional = budgetRepository.findFirstByOrderByIdAsc();
-
+                product.setAmount(product.getAmount()-amount);
                 if (budgetOptional.isPresent()) {
                     Budget budget = budgetOptional.get();
                     sale.setAmount(amount + (amount * (budget.getPercent() / 100)));
@@ -55,6 +55,6 @@ public class ProductSalesServiceImpl implements ProductSalesService {
                 }
             }
         }
-        return "null";
+        return null;
     }
 }

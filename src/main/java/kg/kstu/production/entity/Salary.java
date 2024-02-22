@@ -1,11 +1,13 @@
 package kg.kstu.production.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "salary", uniqueConstraints = {@UniqueConstraint(columnNames = {"year", "month", "employee_id"})})
 public class Salary {
@@ -23,17 +25,11 @@ public class Salary {
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = true)
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "purchase_id", referencedColumnName = "id", nullable = true)
-    private MaterialPurchase purchase;
+    private Integer purchase;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "production_id", referencedColumnName = "id", nullable = true)
-    private ProductProduction production;
+    private Integer production;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "sale_id", referencedColumnName = "id", nullable = true)
-    private ProductSale sale;
+    private Integer sale;
 
     private Integer common;
 

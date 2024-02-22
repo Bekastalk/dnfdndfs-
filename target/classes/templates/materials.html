@@ -41,6 +41,7 @@
 -->
                 <a href="/material/purchase" class="btn btn-outline-success" role="button" aria-disabled="true">Закупка</a>
                 <a href="/material/purchase-list" class="btn btn-outline-success" role="button" aria-disabled="true">Список Закупок</a>
+                <a href="/material/create" class="btn btn-outline-success" role="button" aria-disabled="true">Создать материал</a>
             </div>
             <table class="table">
                 <thead class="thead-dark">
@@ -59,6 +60,10 @@
                     <td th:text="${material.getUnitOfMeasurement().getName()}"></td>
                     <td th:text="${material.getQuantity()}"></td>
                     <td th:text="${material.getAmount()}"></td>
+                    <td>
+                        <a th:href="@{'/material/delete/' + ${material.id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Вы уверены, что хотите удалить материал?');">Удалить</a>
+                        <a th:href="@{'/material/edit/' + ${material.id}}" class="btn btn-outline-primary btn-sm">Редактировать</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

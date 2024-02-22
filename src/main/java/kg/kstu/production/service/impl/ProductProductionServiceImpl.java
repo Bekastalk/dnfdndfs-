@@ -78,6 +78,25 @@ public class ProductProductionServiceImpl implements ProductProductionService {
         return true;
     }
 
+    public Boolean getMaterialAmount(List<Ingredient> ingredientListOfTheProduct) {
+        List<Material> materials = new ArrayList<>();
+        for (Ingredient ingredient : ingredientListOfTheProduct) {
+            Optional<Material> materialOptional = materialRepository.findById(ingredient.getMaterial().getId());
+            Float requiredQuantity = ingredient.getQuantity();
+            if(materialOptional.isPresent()) {
+                if (materialOptional.get().getQuantity() < requiredQuantity) {
+                    return false;
+                } else {
+                    Float quantity = materialOptional.get().getQuantity() - requiredQuantity;
+                    materialOptional.get().setQuantity(quantity);
+                    materials.add(materialOptional.get());
+                }
+            }
+        }
+        materialRepository.saveAll(materials);
+        return true;
+    }
+
     @Override
     public void increaseProductQuantity(Long productId, Float productQuantity) {
         Optional<Product> productOptional = productRepository.findById(productId);

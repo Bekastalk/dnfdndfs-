@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Material</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-3">
+  <h1>Create Material</h1>
+  <form action="/material/material-create" method="post">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="unitOfMeasurement">Unit of Measurement</label>
+      <select class="form-control" id="unitOfMeasurement" name="unitOfMeasurement" required>
+        <option value="">Select Unit</option>
+        <!-- Iterate over unitOfMeasurements -->
+        <th:block th:each="unit : ${unitOfMeasurements}">
+          <option th:value="${unit.id}" th:text="${unit.name}"></option>
+        </th:block>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" id="quantity" name="quantity" required>
+    </div>
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input type="number" class="form-control" id="amount" name="amount" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>

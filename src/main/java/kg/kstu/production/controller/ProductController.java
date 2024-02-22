@@ -86,18 +86,8 @@ public class ProductController {
 
     @PostMapping(value = "/product/create-sale")
     public String createSale(ProductSale sale, Model model) {
-        String result = salesService.create(sale);
-        if (result.equals("Done")) {
-            return "redirect:/product/list";
-        } else if (result.equals("null")) {
-            model.addAttribute("errorMessage", "Количества продукта недостаточно!");
-            model.addAttribute("products", productService.getAll());
-            model.addAttribute("employees", employeeService.getAll());
-            model.addAttribute("thisTime", LocalDateTime.now());
-            model.addAttribute("productSale", new ProductSale());
-            return "createSale";
-        }
-        return result;
+        salesService.create(sale);
+        return "redirect:/product/list";
     }
 
     @GetMapping(value = "/product/list")
