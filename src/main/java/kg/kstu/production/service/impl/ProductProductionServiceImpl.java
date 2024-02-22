@@ -40,6 +40,8 @@ public class ProductProductionServiceImpl implements ProductProductionService {
         Boolean checker = checkMaterialQuantity(ingredientList);
         if (checker.equals(true)) {
             increaseProductQuantity(productProduction.getProduct().getId(), productProduction.getQuantity());
+            Float amount = getMaterialAmount(ingredientList);
+            productProduction.setAmount(amount);
             productionRepository.save(productProduction);
             return "Done";
         } else {
@@ -67,10 +69,6 @@ public class ProductProductionServiceImpl implements ProductProductionService {
             if(materialOptional.isPresent()) {
                 if (materialOptional.get().getQuantity() < requiredQuantity) {
                     return false;
-                } else {
-                    Float quantity = materialOptional.get().getQuantity() - requiredQuantity;
-                    materialOptional.get().setQuantity(quantity);
-                    materials.add(materialOptional.get());
                 }
             }
         }
@@ -78,23 +76,28 @@ public class ProductProductionServiceImpl implements ProductProductionService {
         return true;
     }
 
-    public Boolean getMaterialAmount(List<Ingredient> ingredientListOfTheProduct) {
+    public Float getMaterialAmount(List<Ingredient> ingredientListOfTheProduct) {
         List<Material> materials = new ArrayList<>();
+        Float totalAmount = 0f;
         for (Ingredient ingredient : ingredientListOfTheProduct) {
             Optional<Material> materialOptional = materialRepository.findById(ingredient.getMaterial().getId());
             Float requiredQuantity = ingredient.getQuantity();
             if(materialOptional.isPresent()) {
-                if (materialOptional.get().getQuantity() < requiredQuantity) {
-                    return false;
-                } else {
-                    Float quantity = materialOptional.get().getQuantity() - requiredQuantity;
-                    materialOptional.get().setQuantity(quantity);
+                Material material = materialOptional.get();
+                Float quantity = material.getQuantity();
+                Float amount = material.getAmount();
+                Float amountForOnePoint = amount / quantity;
+
+                totalAmount += (amountForOnePoint * ingredient.getQuantity());
+                    Float materialQuantity = material.getQuantity() - requiredQuantity;
+                    Float materialAmount = material.getAmount() - (ingredient.getQuantity() * amountForOnePoint);
+                    material.setQuantity(materialQuantity);
+                    material.setAmount(materialAmount);
                     materials.add(materialOptional.get());
-                }
+                    materialRepository.save(material);
             }
         }
-        materialRepository.saveAll(materials);
-        return true;
+        return totalAmount;
     }
 
     @Override

@@ -36,6 +36,7 @@ public class ProductProductionController {
         model.addAttribute("products", productService.getAll());
         model.addAttribute("employees", employeeService.getAll());
         model.addAttribute("thisTime", LocalDateTime.now());
+        model.addAttribute("productProduction", new ProductProduction());
         return "createProduction";
     }
 

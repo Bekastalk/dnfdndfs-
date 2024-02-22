@@ -37,6 +37,7 @@
             <th>Production ID</th>
             <th>Product</th>
             <th>Quantity</th>
+            <th>Amount</th>
             <th>Production Date</th>
             <th>Employee</th>
         </tr>
@@ -46,6 +47,7 @@
             <td th:text="${production.id}"></td>
             <td th:text="${production.product.name}"></td>
             <td th:text="${production.quantity}"></td>
+            <td th:text="${production.getAmount()}"></td>
             <td th:text="${production.pDate}"></td>
             <td th:text="${production.employee.name}"></td>
         </tr>
