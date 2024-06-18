@@ -12,7 +12,6 @@ import kg.kstu.production.service.ProductProductionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +38,9 @@ public class ProductProductionServiceImpl implements ProductProductionService {
         List<Ingredient> ingredientList = getIngredientsOfProduct(productProduction.getProduct().getId(), productProduction.getQuantity());
         Boolean checker = checkMaterialQuantity(ingredientList);
         if (checker.equals(true)) {
-            increaseProductQuantity(productProduction.getProduct().getId(), productProduction.getQuantity());
             Float amount = getMaterialAmount(ingredientList);
             productProduction.setAmount(amount);
+            updateProduct(productProduction.getProduct().getId(), productProduction.getQuantity(), amount); // Обновляем существующий продукт
             productionRepository.save(productProduction);
             return "Done";
         } else {
@@ -54,7 +53,6 @@ public class ProductProductionServiceImpl implements ProductProductionService {
         List<Ingredient> ingredientList = ingredientsRepository.findAll()
                 .stream()
                 .filter(i -> productId.equals(i.getProduct().getId()))
-                //.sorted(Comparator.comparing(i -> i.getMaterial().getName()))
                 .collect(Collectors.toList());
         ingredientList.forEach(i -> i.setQuantity(i.getQuantity() * productQuantity));
         return ingredientList;
@@ -62,42 +60,59 @@ public class ProductProductionServiceImpl implements ProductProductionService {
 
     @Override
     public Boolean checkMaterialQuantity(List<Ingredient> ingredientListOfTheProduct) {
-        List<Material> materials = new ArrayList<>();
         for (Ingredient ingredient : ingredientListOfTheProduct) {
             Optional<Material> materialOptional = materialRepository.findById(ingredient.getMaterial().getId());
             Float requiredQuantity = ingredient.getQuantity();
-            if(materialOptional.isPresent()) {
+            if (materialOptional.isPresent()) {
                 if (materialOptional.get().getQuantity() < requiredQuantity) {
                     return false;
                 }
             }
         }
-        materialRepository.saveAll(materials);
         return true;
     }
 
     public Float getMaterialAmount(List<Ingredient> ingredientListOfTheProduct) {
-        List<Material> materials = new ArrayList<>();
         Float totalAmount = 0f;
         for (Ingredient ingredient : ingredientListOfTheProduct) {
             Optional<Material> materialOptional = materialRepository.findById(ingredient.getMaterial().getId());
             Float requiredQuantity = ingredient.getQuantity();
-            if(materialOptional.isPresent()) {
+            if (materialOptional.isPresent()) {
                 Material material = materialOptional.get();
                 Float quantity = material.getQuantity();
                 Float amount = material.getAmount();
                 Float amountForOnePoint = amount / quantity;
 
                 totalAmount += (amountForOnePoint * ingredient.getQuantity());
-                    Float materialQuantity = material.getQuantity() - requiredQuantity;
-                    Float materialAmount = material.getAmount() - (ingredient.getQuantity() * amountForOnePoint);
-                    material.setQuantity(materialQuantity);
-                    material.setAmount(materialAmount);
-                    materials.add(materialOptional.get());
-                    materialRepository.save(material);
+                Float materialQuantity = material.getQuantity() - requiredQuantity;
+                Float materialAmount = material.getAmount() - (ingredient.getQuantity() * amountForOnePoint);
+                material.setQuantity(materialQuantity);
+                material.setAmount(materialAmount);
+                materialRepository.save(material);
             }
         }
         return totalAmount;
+    }
+
+    public void updateProduct(Long productId, Float productQuantity, Float totalMaterialAmount) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            // Проверяем и инициализируем amount, если оно null
+            if (product.getAmount() == null) {
+                product.setAmount(0f);
+            }
+
+            // Добавляем общую сумму материалов к текущей сумме продукции
+            product.setAmount(product.getAmount() + totalMaterialAmount);
+
+            // Увеличиваем количество продукции
+            product.setQuantity(product.getQuantity() + productQuantity);
+
+            productRepository.save(product);
+        }
     }
 
     @Override
@@ -105,9 +120,12 @@ public class ProductProductionServiceImpl implements ProductProductionService {
         Optional<Product> productOptional = productRepository.findById(productId);
 
         if (productOptional.isPresent()) {
-            productOptional.get().setQuantity(productOptional.get().getQuantity() + productQuantity);
-            productRepository.save(productOptional.get());
+            Product product = productOptional.get();
+
+            // Увеличиваем количество продукции
+            product.setQuantity(product.getQuantity() + productQuantity);
+
+            productRepository.save(product);
         }
     }
-
 }

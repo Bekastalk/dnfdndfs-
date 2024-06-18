@@ -44,5 +44,20 @@
         <button type="submit" class="btn btn-primary">Создать ингредиент</button>
     </form>
 </div>
+
+<script>
+    let selectedMaterials = [];
+
+    $('#material').on('change', function() {
+        let selectedMaterialId = $(this).val();
+        if (selectedMaterials.includes(selectedMaterialId)) {
+            alert('Вы уже выбрали этот материал. Пожалуйста, выберите другой материал.');
+            $(this).val(null);
+        } else {
+            selectedMaterials.push(selectedMaterialId);
+        }
+    });
+</script>
+
 </body>
 </html>

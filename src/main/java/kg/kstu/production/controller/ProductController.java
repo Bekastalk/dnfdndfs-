@@ -1,6 +1,5 @@
 package kg.kstu.production.controller;
 
-import kg.kstu.production.entity.MaterialPurchase;
 import kg.kstu.production.entity.Product;
 import kg.kstu.production.entity.ProductSale;
 import kg.kstu.production.service.*;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Controller

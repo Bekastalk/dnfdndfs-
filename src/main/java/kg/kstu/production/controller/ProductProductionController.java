@@ -5,11 +5,11 @@ import kg.kstu.production.service.BudgetService;
 import kg.kstu.production.service.EmployeeService;
 import kg.kstu.production.service.ProductProductionService;
 import kg.kstu.production.service.ProductService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,16 +41,18 @@ public class ProductProductionController {
     }
 
     @PostMapping(value = "/save")
-    public String save(ProductProduction productProduction, Model model) {
+    public String save(@ModelAttribute ProductProduction productProduction, Model model) {
         String result = productionService.create(productProduction);
-        if(result.equals("Done")) {
+        if (result.equals("Done")) {
             return "redirect:/product/production/list";
         } else {
             model.addAttribute("errorMessage", result);
             model.addAttribute("products", productService.getAll());
             model.addAttribute("employees", employeeService.getAll());
             model.addAttribute("thisTime", LocalDateTime.now());
+            model.addAttribute("productProduction", productProduction); // Добавляем объект обратно в модель
             return "createProduction";
         }
     }
+
 }

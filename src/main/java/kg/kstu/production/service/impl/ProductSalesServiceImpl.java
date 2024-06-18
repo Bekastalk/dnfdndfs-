@@ -37,9 +37,9 @@ public class ProductSalesServiceImpl implements ProductSalesService {
             Product product = productOptional.get();
 
             if(product.getQuantity() >= sale.getQuantity()) {
-                float amount = product.getAmount() / product.getQuantity() * sale.getQuantity();
+                float amount = (product.getAmount() / product.getQuantity()) * sale.getQuantity();
                 product.setQuantity(product.getQuantity() - sale.getQuantity());
-
+                // метод для получение бюджета
                 Optional<Budget> budgetOptional = budgetRepository.findFirstByOrderByIdAsc();
                 product.setAmount(product.getAmount()-amount);
                 if (budgetOptional.isPresent()) {

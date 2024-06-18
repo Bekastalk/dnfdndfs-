@@ -14,6 +14,27 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            // Функция для проверки достаточности средств
+            function checkFunds() {
+                var budget = parseFloat($("#budget").text());
+                var amount = parseFloat($("#amount").val());
+                if (amount > budget) {
+                    alert("Недостаточно средств для закупки");
+                } else {
+                    // Отправка формы, если средств достаточно
+                    $("form").submit();
+                }
+            }
+
+            // Обработчик клика по кнопке "Сохранить"
+            $(".btn-success").click(function (e) {
+                e.preventDefault(); // Предотвращение стандартного поведения кнопки
+                checkFunds(); // Вызов функции для проверки средств
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container mt-3">
@@ -21,7 +42,7 @@
         <div class="position-fixed" style="top: 0; right: 0; padding: 10px; background-color: #d6d8db; border: 1px solid #d6d8db;">
             <h5>Бюджет</h5>
             <ul class="list-group">
-                <li class="list-group-item" th:each="budget : ${budgets}" th:text="${budget.amount}"></li>
+                <li id="budget" class="list-group-item" th:each="budget : ${budgets}" th:text="${budget.amount}">1000</li>
             </ul>
         </div>
         <h1 class="header">Добавление Закупки Материала</h1>
@@ -30,9 +51,7 @@
             <strong th:text="${errorMessage}"></strong>
         </div>
 
-        <form action="#" th:action="@{/material/create-purchase}" method="post" th:object="${materialPurchase}"> </form>
-
-        <form action="#" th:action="@{/material/create-purchase}" method="post" th:object="${materialPurchase}">
+        <form th:action="@{/material/create-purchase}" method="post" th:object="${materialPurchase}">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="material">Материал</label>
                 <div class="col-sm-5">
@@ -69,9 +88,10 @@
                     </select>
                 </div>
             </div>
-            <button class="btn btn-success" type="submit" value="Сохранить">Сохранить</button>
+            <button class="btn btn-success" type="button">Сохранить</button>
         </form>
     </div>
 </div>
 </body>
 </html>
+

@@ -19,6 +19,7 @@
             const form = document.querySelector('form');
             const purchaseDateInput = document.getElementById('purchaseDate');
             const quantityInput = document.getElementById('quantity');
+            const materialSelect = document.getElementById('material');
 
             const now = new Date();
             const formattedDate = now.toISOString().slice(0, 16);
@@ -29,11 +30,12 @@
                 event.preventDefault();
 
                 // Проверяем, достаточно ли продукции
-                const selectedProduct = document.getElementById('material');
-                const availableQuantity = parseInt(selectedProduct.options[selectedProduct.selectedIndex].getAttribute('data-quantity'));
+                const selectedMaterial = materialSelect.options[materialSelect.selectedIndex];
+                const availableQuantity = parseInt(selectedMaterial.getAttribute('data-quantity'));
+                const requiredQuantity = parseInt(quantityInput.value);
 
-                if (parseInt(quantityInput.value) > availableQuantity) {
-                    alert('Недостаточно продукции!');
+                if (requiredQuantity > availableQuantity) {
+                    alert('Не хватает материала! Доступно только ' + availableQuantity + ' единиц.');
                 } else {
                     // Если продукции достаточно, отправляем форму
                     form.submit();
